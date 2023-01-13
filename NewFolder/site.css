@@ -1,0 +1,55 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.widget-box2{
+    border-radius: 20px;
+    background-color: #dee2e6;
+    height: 370px;
+
+}
+
+.widget-box1{
+  border-radius: 20px;
+  background-color: #dee2e6;
+  height: 370px;
+  margin-bottom: 20px;
+  /* width: 100%; */
+ 
+}
+
+.flex-box{
+  padding: 0%;
+  margin: 0%;
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+  /* background-color: aqua; */
+}
+
+.container1{
+  height: 100%;
+  width: 100%;
+
+
+}
+
+@media screen and (max-width:770px){
+  
+}

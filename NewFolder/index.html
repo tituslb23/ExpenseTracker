@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+	<title>Expense Tracker</title>
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="../CSS/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+    <link rel="stylesheet" href="Shared.css" asp-append-version="true" />
+    <link rel="stylesheet" href="site.css" asp-append-version="true" />
+    <!-- <link rel="stylesheet" href="../CSS/site.css" asp-append-version="true" /> -->
+   
+    <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script> -->
+  
+</head>
+<body>
+<header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-5 p-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Expense Tracker</a>
+              
+            </div>
+        </nav>
+
+    </header>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <!-- <div class="col-md-12" >
+                 <main role="main" class="pb-3">
+
+                     <div class="row">
+                         <div class="d-flex flex-column">
+                             <div class="d-flex mb-1">
+                                 <div class="flex-grow-1">
+                                     <h3 class="fw-bold"></h3>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                </main>
+            </div> -->
+        </div>
+    </div>
+<div class="mt-5 container1">
+    <div class="flex-box row">
+    <div class="col-md-6">
+        <div class="widget p-4 widget-box1">
+
+          <form  method="post" name="categoryForm">
+             <span id="nameAlert" class="text-danger"></span>
+            <input type="text" id="cat-name" placeholder="Category Name" class="form-control mb-4" name="cName" required >
+           
+             <span id="limitAlert" class="text-danger"></span>
+            <input type="number" id="cat-limit" placeholder="Category Limit" class="form-control" name="cLimit" required >
+           
+
+            <div class="form-group mt-4 d-flex justify-content-center" >
+                <button id="btnAdd" class="btn btn-primary" onclick="return submitCategory()" >Add</button>
+            </div>
+            <div class="w-100">
+                                    <span id="message" class="text-success"></span>
+            </div>
+            </form>    
+
+        </div>
+    </div>
+
+    <div class="col-md-6 widget-box2 p-4">
+        <form>
+               <span class="text-danger" id="enameAlert"></span>
+                <input type="text" placeholder="Expense Name" id="enInput" class="form-control mb-4" required />
+                
+            
+                 <span class="text-danger" id="descAlert"></span>
+                <textarea type="text" placeholder="Expense Description" class="form-control mb-4" id="edescInput" required ></textarea>
+               
+            
+                <span class="text-danger" id="selectAlert"></span>
+                <select  class ="form-control mb-4" id="select" placeholder="Select" required>
+                    
+
+                </select>
+           
+                <span class="text-danger" id="amountAlert"></span>
+                <input class="form-control mb-4" type="number" id="amountInput" placeholder="Amount" required />
+                
+           
+            <div class="form-group mt-4 d-flex justify-content-center" >
+                <button id="enAddButton" class="btn btn-primary" onclick="return submitExpense()">Add</button>
+            </div>
+            </form>
+    </div>
+</div>
+</div>
+<script src="script.js"></script>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-12 d-flex">
+                 
+            <div class="col-md-6 ">
+                    <h3>Categories</h3>
+                    <div class="row">
+                        <!-- <div class="col-md-4">
+                            <p>
+                                <a href="AddOrEditCategory.html"><button type="button" class="btn btn-secondary mt-3">Add Category</button></a>
+                            </p>
+                        </div>
+                        <div class="col-md-8">
+                            <form action="Index" method="get">
+                                <div class="form-actions no color p-3">
+                                    <p>
+                                        <input type="text" name="SearchString" value="@ViewData["Search"]" />
+                                        <input type="submit" value="Search" class="btn btn-primary" />
+                                    </p>
+                                </div>
+                            </form>
+                        </div> -->
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <a style="color:#000; text-decoration:none;">Category Name <i class="fa-solid fa-sort"></i></a>
+                                </th>
+                                <th>    
+                                    <a style="color:#000; text-decoration:none;">Category Limit <i class="fa-solid fa-sort"></i></a>
+                                </th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cat-table">
+                   
+                        </tbody>
+                    </table>
+                 </div>
+                 
+
+
+
+                 <div class="col-md-6">
+                    <h3>Expenses</h3>
+                     <div class="row">
+                        <div class="col-md-4">
+                           <!--  <p>
+                                <a href="AddOrEditExpense.html"><button type="button" class="btn btn-secondary mt-3">Add Expense</button></a>
+                            </p> -->
+                        </div>
+                        <div class="col-md-8">
+                           <!--  <form asp-action="Index" method="get">
+                                <div class="form-actions no color p-3">
+                                    <p>
+                                        <input type="text" name="SearchString" value="@ViewData["Search"]" />
+                                        <input type="submit" value="Search" class="btn btn-primary" />
+                                    </p>
+                                </div>
+                            </form> -->
+                        </div>
+                    </div>
+                    <table class="table" >
+                        <thead>
+                            <tr>
+                                <th>
+                                    Expense Name
+                                </th>
+                                <th>
+                                    Expense Description
+                                </th>
+                                <th>
+                                    Category Name
+                                </th>
+                                <th>
+                                   Amount
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="exp-table">
+                    <!-- @foreach (var item in Model) {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ExpenseName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ExpenseDescription)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Category.CategoryId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Amount)
+                                </td>
+                                <td>
+                                    <a asp-action="AddOrEdit" asp-route-id="@item.ExpenseId">Edit</a> |
+                                   
+                                    <a asp-action="Delete" asp-route-id="@item.ExpenseId">Delete</a>
+                                </td>
+                            </tr>
+                    } -->
+                        </tbody>
+                    </table>
+
+                    <button id="selectall" class="btn btn-primary" style="visibility: hidden;" onclick="return getAllExpenses()">Select All</button>
+                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+<footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2022 - Expense Tracker - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+<script type="text/javascript" src="../JS/script.js"></script>
+<script type="text/javascript" src="../JS/exscript.js"></script>
+
+</body>
+</html>
